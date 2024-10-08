@@ -306,7 +306,7 @@ public:
       TDynamicVector<T> operator*(const TDynamicVector<T>& v)
       {
           if (v.size() != sz) {
-              throw "wrong size of vector"
+              throw "wrong size of vector";
           }
           TDynamicVector<T> res(sz);
           for (int i = 0; i < sz; i++) {
