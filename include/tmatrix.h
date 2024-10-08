@@ -368,7 +368,8 @@ public:
       TDynamicMatrix operator*(const TDynamicMatrix& m)
       {
           TDynamicMatrix<T> res(sz);
-          TDynamicMatrix<T> m1(sz) = m.transposing();
+          TDynamicMatrix<T> m1;
+          m1 = m.transposing();
           for (int i = 0; i < sz; i++) {
               for (int j = 0; j < sz; j++) {
                   res[i][j] = pMem[i] * m1[j];
