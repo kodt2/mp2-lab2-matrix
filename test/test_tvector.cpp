@@ -270,4 +270,11 @@ TEST(TDynamicVector, cant_multiply_vectors_with_not_equal_size)
 	int res = 4;
 	EXPECT_EQ(v1 * v2, res);
 }
+TEST(TDynamicVector, can_move)
+{
+	int size1 = 2;
+	TDynamicVector<int> v1(size1), v2;
+	v2 = std::move(v1);
+	EXPECT_EQ(v2, v1);
+}
 
