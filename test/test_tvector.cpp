@@ -270,11 +270,32 @@ TEST(TDynamicVector, cant_multiply_vectors_with_not_equal_size)
 	int res = 4;
 	EXPECT_EQ(v1 * v2, res);
 }
-TEST(TDynamicVector, can_move)
+TEST(TDynamicVector, move_constructor_check)
 {
-	int size1 = 2;
-	TDynamicVector<int> v1(size1), v2;
-	v2 = std::move(v1);
-	EXPECT_EQ(v2, v1);
+    const int size = 10;
+    TDynamicVector<int> v1(size);
+    for (int i = 0; i < size; i++)
+        v1[i] = i;
+    TDynamicVector<int> v3(v1);
+    
+    TDynamicVector<int> v2(std::move(v1));
+
+    ASSERT_EQ(v2, v3);
+    ASSERT_EQ(v1.data(), nullptr);
+    ASSERT_EQ(v1.size(), 0);
 }
 
+TEST(TDynamicVector, move_opertor_check)
+{
+    const int size = 10;
+    TDynamicVector<int> v1(size);
+    for (int i = 0; i < size; i++)
+        v1[i] = i;
+    TDynamicVector<int> v3(v1);
+
+    TDynamicVector<int> v2 = std::move(v1);
+
+    ASSERT_EQ(v2, v3);
+    ASSERT_EQ(v1.data(), nullptr);
+    ASSERT_EQ(v1.size(), 0);
+}
