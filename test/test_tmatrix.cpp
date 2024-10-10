@@ -182,4 +182,24 @@ TEST(TDynamicMatrix, cant_subtract_matrixes_with_not_equal_size)
 	res[0][0] = -1;
 	EXPECT_EQ(res, m1 - m2);
 }
+TEST(TDynamicMatrix, move_constructor_check)
+{
+    const int size = 10;
+    TDynamicMatrix<int> v1(size);
+    TDynamicMatrix<int> res(v1);
+    
+    TDynamicMatrix<int> v2(std::move(v1));
 
+    EXPECT_EQ(v2, res);
+}
+
+TEST(TDynamicMatrix, move_opertor_check)
+{
+    const int size = 2;
+    TDynamicMatrix<int> v1(size);
+    TDynamicMatrix<int> res(v1);
+
+    TDynamicMatrix<int> v2 = std::move(v1);
+
+    EXPECT_EQ(v2, res);
+}
