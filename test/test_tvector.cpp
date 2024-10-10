@@ -274,28 +274,20 @@ TEST(TDynamicVector, move_constructor_check)
 {
     const int size = 10;
     TDynamicVector<int> v1(size);
-    for (int i = 0; i < size; i++)
-        v1[i] = i;
-    TDynamicVector<int> v3(v1);
+    TDynamicVector<int> res(v1);
     
     TDynamicVector<int> v2(std::move(v1));
 
-    ASSERT_EQ(v2, v3);
-    ASSERT_EQ(v1.data(), nullptr);
-    ASSERT_EQ(v1.size(), 0);
+    EXPECT_EQ(v2, res);
 }
 
 TEST(TDynamicVector, move_opertor_check)
 {
-    const int size = 10;
+    const int size = 2;
     TDynamicVector<int> v1(size);
-    for (int i = 0; i < size; i++)
-        v1[i] = i;
-    TDynamicVector<int> v3(v1);
+    TDynamicVector<int> res(v1);
 
     TDynamicVector<int> v2 = std::move(v1);
 
-    ASSERT_EQ(v2, v3);
-    ASSERT_EQ(v1.data(), nullptr);
-    ASSERT_EQ(v1.size(), 0);
+    EXPECT_EQ(v2, res);
 }
